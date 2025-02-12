@@ -26,15 +26,30 @@ source ./**/*.sh
 ##
 # Help and usage
 #
+declare -a NF_FUNCTION_NAMES
+declare -a NF_FUNCTION_DESCRIPTIONS
+
+function nf_function() {
+  NAME=${1}
+  DESCRIPTION=${2}
+
+  NF_FUNCTION_NAMES+=("${NAME}")
+  NF_FUNCTION_DESCRIPTIONS+=("${DESCRIPTION}")
+}
+
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"
+
+  for i in $(seq 1 ${#NF_FUNCTION_NAMES[@]}); do
+    printf "  %-30s %s\n" "${NF_FUNCTION_NAMES[$i]}" "${NF_FUNCTION_DESCRIPTIONS[$i]}"
+  done
 }
 
 ##
 # Configuration functions
 #
 
-# Set default API server (default: http://localhost:3000)
+nf_function nf_server "Set API server (default: http://localhost:3000)"
 function nf_server() {
   SERVER=${1:-http://localhost:3000}
 
@@ -43,6 +58,7 @@ function nf_server() {
   echo "API server set to ${SERVER}"
 }
 
+nf_function nf_path "Set repositories path (default: ~/Code)"
 function nf_path() {
   _PATH=${1:-~/Code}
 
@@ -51,7 +67,7 @@ function nf_path() {
   echo "Repositories path set to ${_PATH}"
 }
 
-# Set default database prefix (default: nephroflow_)
+nf_function nf_db_prefix "Set database prefix (default: nephroflow_)"
 function nf_db_prefix() {
   PREFIX=${1:-nephroflow_}
 
@@ -60,7 +76,7 @@ function nf_db_prefix() {
   echo "Database prefix set to ${PREFIX}"
 }
 
-# Set default curl options (default: --silent --show-error)
+nf_function nf_curl_options "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
 function nf_curl_options() {
   # shellcheck disable=SC2206
   NF_CURL_OPTIONS=(${=@:-"--silent" "--fail" "--show-error"})
@@ -68,7 +84,9 @@ function nf_curl_options() {
   echo "cURL options set to ${NF_CURL_OPTIONS[*]}"
 }
 
-# Strip the API server from the URL
+##
+# Helper functions
+#
 function nf_url() {
   URL=${1}
 
