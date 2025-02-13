@@ -21,7 +21,9 @@ declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
 # Import scripts
-source ./**/*.sh
+for FILE in $(find . -name '*.sh' -not -path './nf.sh'); do
+  source "${FILE}"
+done
 
 ##
 # Help and usage
