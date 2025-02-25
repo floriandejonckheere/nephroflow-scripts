@@ -31,7 +31,10 @@ done
 ##
 # Help and usage
 #
+unset NF_FUNCTION_NAMES
 declare -a NF_FUNCTION_NAMES
+
+unset NF_FUNCTION_DESCRIPTIONS
 declare -a NF_FUNCTION_DESCRIPTIONS
 
 function nf_function() {
