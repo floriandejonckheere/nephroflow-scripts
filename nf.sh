@@ -13,6 +13,9 @@ export NF_SERVER=http://localhost:3000
 # Path to directory containing the repositories
 export NF_PATH=~/Code
 
+# Path to the NephroFlow CLI
+export NF_PATH_CLI="${HOME}/.nipro"
+
 # Database prefix
 export NF_DB_PREFIX=nephroflow_
 
@@ -21,7 +24,7 @@ declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
 # Import scripts
-for FILE in $(find . -name '*.sh' -not -path './nf.sh'); do
+for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path 'nf.sh'); do
   source "${FILE}"
 done
 
