@@ -24,7 +24,7 @@ declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
 # Import scripts
-for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path 'nf.sh'); do
+for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path 'nf.sh' > /dev/null); do
   source "${FILE}"
 done
 
