@@ -11,13 +11,13 @@ This repository contains convenience scripts for development at [NDTE](https://n
 Clone the repository:
 
 ```bash
-git clone https://github.com/floriandejonckheere/nipro ~/.asdf/
+git clone https://github.com/floriandejonckheere/nipro ~/.nipro/
 ```
 
 Add the following line to your `.zshrc` file:
 
 ```bash
-source ~/.nipro/nf
+source ~/.nipro/nf.sh
 ```
 
 ## Usage
