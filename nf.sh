@@ -26,33 +26,60 @@ export NF_CURL_OPTIONS=(--silent --fail --show-error)
 ##
 # Help and usage
 #
-unset NF_FUNCTION_NAMES
-declare -a NF_FUNCTION_NAMES
+unset NF_CATEGORIES
+declare -A NF_CATEGORIES
 
-unset NF_FUNCTION_DESCRIPTIONS
-declare -a NF_FUNCTION_DESCRIPTIONS
+unset NF_FUNCTIONS
+declare -A NF_FUNCTIONS
 
-function nf_function() {
+unset NF_CATEGORIES_TO_FUNCTIONS
+declare -A NF_CATEGORIES_TO_FUNCTIONS
+
+function nf_category() {
   NAME=${1}
   DESCRIPTION=${2}
 
-  NF_FUNCTION_NAMES+=("${NAME}")
-  NF_FUNCTION_DESCRIPTIONS+=("${DESCRIPTION}")
+  NF_CATEGORIES[${NAME}]="${DESCRIPTION}"
 }
+
+function nf_function() {
+  NAME=${1}
+  CATEGORY=${2}
+  DESCRIPTION=${3}
+
+  # Add to functions list
+  NF_FUNCTIONS[${NAME}]="${DESCRIPTION}"
+
+  # Append to category to functions list
+  if [[ ! ${NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]} ]]; then
+    NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]="${NAME}"
+  else
+    NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]="${NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]} ${NAME}"
+  fi
+}
+
+# Define categories
+nf_category authentication "Authentication functions"
+nf_category configuration "Configuration functions"
 
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"
 
-  for i in $(seq 1 ${#NF_FUNCTION_NAMES[@]}); do
-    printf "  %-30s %s\n" "${NF_FUNCTION_NAMES[$i]}" "${NF_FUNCTION_DESCRIPTIONS[$i]}"
+  # Loop over categories, and print functions in each category
+  for CATEGORY in ${(k)NF_CATEGORIES}; do
+    printf "\n%s\n" "${NF_CATEGORIES[${CATEGORY}]}"
+
+    # Loop over functions in category
+    for FUNCTION in ${(s: :)NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]}; do
+      printf "  %-30s %s\n" "${FUNCTION}" "${NF_FUNCTIONS[${FUNCTION}]}"
+    done
   done
 }
 
 ##
 # Configuration functions
 #
-
-nf_function nf_server "Set API server (default: http://localhost:3000)"
+nf_function nf_server configuration "Set API server (default: http://localhost:3000)"
 function nf_server() {
   SERVER=${1:-http://localhost:3000}
 
@@ -61,7 +88,7 @@ function nf_server() {
   echo "API server set to ${SERVER}"
 }
 
-nf_function nf_path "Set repositories path (default: ~/Code)"
+nf_function nf_path configuration "Set repositories path (default: ~/Code)"
 function nf_path() {
   _PATH=${1:-~/Code}
 
@@ -70,7 +97,7 @@ function nf_path() {
   echo "Repositories path set to ${_PATH}"
 }
 
-nf_function nf_db_prefix "Set database prefix (default: nephroflow_)"
+nf_function nf_db_prefix configuration "Set database prefix (default: nephroflow_)"
 function nf_db_prefix() {
   PREFIX=${1:-nephroflow_}
 
@@ -79,7 +106,7 @@ function nf_db_prefix() {
   echo "Database prefix set to ${PREFIX}"
 }
 
-nf_function nf_curl_options "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
+nf_function nf_curl_options configuration "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
 function nf_curl_options() {
   # shellcheck disable=SC2206
   NF_CURL_OPTIONS=(${=@:-"--silent" "--fail" "--show-error"})
