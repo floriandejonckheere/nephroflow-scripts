@@ -23,11 +23,6 @@ export NF_DB_PREFIX=nephroflow_
 declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
-# Import scripts
-for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path '*/nf.sh'); do
-  source "${FILE}"
-done
-
 ##
 # Help and usage
 #
@@ -109,3 +104,10 @@ function nf_url() {
 
   echo "${URL}"
 }
+
+##
+# Load all scripts in the current directory
+#
+for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path '*/nf.sh'); do
+  source "${FILE}"
+done
