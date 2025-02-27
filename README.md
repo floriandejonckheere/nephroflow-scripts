@@ -5,6 +5,8 @@ This repository contains convenience scripts for development at [NDTE](https://n
 ## Prerequisites
 
 - [Zsh](https://www.zsh.org)
+- [jq](https://stedolan.github.io/jq/)
+- [curl](https://curl.se/)
 
 ## Installation
 

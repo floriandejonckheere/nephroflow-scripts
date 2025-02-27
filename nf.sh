@@ -62,6 +62,7 @@ function nf_function() {
 nf_category helper "Helper functions"
 nf_category configuration "Configuration functions"
 nf_category authentication "Authentication functions"
+nf_category http "HTTP functions"
 
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"
