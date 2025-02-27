@@ -65,6 +65,7 @@ nf_category authentication "Authentication functions"
 nf_category http "HTTP functions"
 nf_category database "Database functions"
 nf_category docker "Docker functions"
+nf_category dev "Development functions"
 
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"

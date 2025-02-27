@@ -7,6 +7,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [Zsh](https://www.zsh.org)
 - [jq](https://stedolan.github.io/jq/)
 - [curl](https://curl.se/)
+- [git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
 
 Clone the relevant repositories to your local machine:
