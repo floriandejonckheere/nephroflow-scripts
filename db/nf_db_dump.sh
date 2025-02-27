@@ -1,0 +1,19 @@
+nf_function nf_db_dump database "Dump a database to a file"
+function nf_db_dump() {
+  # Remove prefix
+  DATABASE=${1#"${NF_DB_PREFIX}"}
+  DATABASE=${DATABASE:-development}
+
+  FILE=${2:-${NF_DB_PREFIX}${DATABASE}}
+  FILE="${FILE%.sql}.sql.gz"
+
+  if [[ ! ${DATABASE} ]]; then
+    echo "Usage: ${0} DATABASE [FILE]"
+
+    return 1
+  fi
+
+  nf_compose exec postgres pg_dump -U postgres "${NF_DB_PREFIX}${DATABASE}" | gzip > "${FILE}"
+
+  echo "Database ${NF_DB_PREFIX}${DATABASE} dumped to ${FILE}"
+}
