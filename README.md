@@ -7,6 +7,18 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [Zsh](https://www.zsh.org)
 - [jq](https://stedolan.github.io/jq/)
 - [curl](https://curl.se/)
+- [Docker](https://www.docker.com/)
+
+Clone the relevant repositories to your local machine:
+
+```sh
+mkdir ~/Code
+cd ~/Code
+
+git clone https://github.com/nephroflow/nephroflow-api.git
+git clone https://github.com/nephroflow/nephroflow-manager.git
+git clone https://github.com/nephroflow/link.git
+```
 
 ## Installation
 
