@@ -59,8 +59,9 @@ function nf_function() {
 }
 
 # Define categories
-nf_category authentication "Authentication functions"
+nf_category helper "Helper functions"
 nf_category configuration "Configuration functions"
+nf_category authentication "Authentication functions"
 
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"
@@ -117,6 +118,24 @@ function nf_curl_options() {
 ##
 # Helper functions
 #
+nf_function nf_compose helper "Run docker compose command"
+function nf_compose() {
+  COMPOSE_FILE="${NF_PATH}/nephroflow-api/compose.yaml"
+
+  if [[ ! -f ${COMPOSE_FILE} ]]; then
+    COMPOSE_FILE="${NF_PATH}/nephroflow-api/docker-compose.yml"
+  fi
+
+  if [[ ! -f ${COMPOSE_FILE} ]]; then
+    echo "Error: ${COMPOSE_FILE} not found"
+
+    return 1
+  fi
+
+  docker compose -f "${COMPOSE_FILE}" "${@}"
+}
+
+nf_function nf_url helper "Strip protocol, ://, hostname, port, and /api from URL"
 function nf_url() {
   URL=${1}
 
