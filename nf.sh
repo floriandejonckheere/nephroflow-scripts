@@ -151,6 +151,11 @@ function nf_url() {
   echo "${URL}"
 }
 
+nf_function until_fail helper "Run a command until it fails"
+function until_fail() {
+  while "$@"; do :; done
+}
+
 ##
 # Load all scripts in the current directory
 #
