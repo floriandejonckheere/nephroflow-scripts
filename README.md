@@ -10,6 +10,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
 - [Kubernetes](https://kubernetes.io/)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 Clone the relevant repositories to your local machine:
 
