@@ -67,6 +67,7 @@ nf_category database "Database functions"
 nf_category docker "Docker functions"
 nf_category dev "Development functions"
 nf_category tsh "Teleport SSH functions"
+nf_category k8s "Kubernetes functions"
 
 function nf_help() {
   echo "NephroFlow CLI ${NF_VERSION}"
