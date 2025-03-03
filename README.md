@@ -9,6 +9,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [curl](https://curl.se/)
 - [git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
+- [Kubernetes](https://kubernetes.io/)
 
 Clone the relevant repositories to your local machine:
 
