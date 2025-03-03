@@ -1,0 +1,41 @@
+name: nephroflow
+
+services:
+  web:
+    image: nephroflow.azurecr.io/api:v22.0.0-rc.5
+    platform: linux/amd64
+    user: root
+    volumes:
+      - ${NF_PATH}/nephroflow-api:/srv:cached
+      - ${HOME}/.bundle/config:/usr/local/bundle/config
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      PG_HOST: postgres
+      PG_USERNAME: postgres
+      PG_PASSWORD: postgres
+      PG_DATABASE: nephroflow_development
+      RAILS_ENV: development
+      SECRET_KEY_BASE: development_secret
+      REDIS_URL: redis://redis:6379/0
+      ACCESS_CONTROL_ALLOW_ORIGIN: http://localhost:8080
+      MAILER_HOST: http://127.0.0.1:3000
+      MAILER_SENDER: noreply@niprodigital.com
+
+  postgres:
+    image: postgres:16
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
+volumes:
+  postgres:
+  redis:

@@ -1,4 +1,4 @@
-# Nipro scripts
+# NephroFlow scripts
 
 This repository contains convenience scripts for development at [NDTE](https://niprodigital.com).
 
@@ -43,6 +43,18 @@ Use the `nf_help` command to get an overview of all available commands.
 
 ```bash
 nf_help
+```
+
+### NephroFlow API (specific version)
+
+This repository contains bare Docker compose files to run older versions of the NephroFlow API.
+The compose files share the project name with the current version of the API, so the database and Redis containers will be shared.
+Please ensure the database has the correct database version.
+
+To start a container with a specific version of the NephroFlow API, use the following command:
+
+```bash
+nf_v 19.1
 ```
 
 ## License
