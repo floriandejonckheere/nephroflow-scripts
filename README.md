@@ -58,6 +58,18 @@ To start a container with a specific version of the NephroFlow API, use the foll
 nf_v 19.1
 ```
 
+The container will be started with port 3000 exposed.
+
+The image contains the installed gems at the moment of building.
+Since `${NF_PATH}/nephroflow-api` is mounted to `/srv`, if there is a discrepancy between the installed gems and the ones in `Gemfile.lock`, Rails will not start.
+Install the gems in the container with:
+
+```bash
+apt update
+apt install -y build-essential libcurl4-openssl-dev git libxml2-dev libxslt-dev libpq-dev libicu-dev
+bundle
+```
+
 ## License
 
 (C) 2025 [Nipro Digital Technologies Europe](https://niprodigital.com/).

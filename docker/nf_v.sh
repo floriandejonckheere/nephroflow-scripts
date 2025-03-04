@@ -15,14 +15,14 @@ function nf_v() {
     return 1
   fi
 
-  COMPOSE_PATH="${NF_PATH_CLI}/compose/${VERSION}.yaml"
+  COMPOSE_FILE="${NF_PATH_CLI}/compose/${VERSION}.yaml"
 
-  if [[ ! -f "${COMPOSE_PATH}" ]]; then
-    echo "Error: ${COMPOSE_PATH} not found"
+  if [[ ! -f "${COMPOSE_FILE}" ]]; then
+    echo "Error: ${COMPOSE_FILE} not found"
 
     return 1
   fi
 
   echo "Starting NephroFlow API container (version: ${VERSION})"
-  nf_compose -f "${COMPOSE_PATH}" run --rm --service-ports web "${COMMAND}"
+  docker compose -f "${COMPOSE_FILE}" run --rm --service-ports web "${COMMAND}"
 }
