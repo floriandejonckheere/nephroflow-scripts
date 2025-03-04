@@ -10,6 +10,8 @@ function nf_db_drop() {
     # Remove prefix
     DATABASE=${DATABASE#"${NF_DB_PREFIX}"}
 
+    echo "Dropping database ${NF_DB_PREFIX}${DATABASE}"
+
     nf_db -c "DROP DATABASE ${NF_DB_PREFIX}${DATABASE}" > /dev/null
 
     echo "Database ${NF_DB_PREFIX}${DATABASE} dropped"

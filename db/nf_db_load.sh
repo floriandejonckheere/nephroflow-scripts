@@ -13,6 +13,8 @@ function nf_db_load() {
     return 1
   fi
 
+  echo "Loading database ${NF_DB_PREFIX}${DATABASE} from ${FILE}"
+
   gunzip -c "${FILE}" | nf_compose exec -T postgres psql -U postgres "${NF_DB_PREFIX}${DATABASE}" > /dev/null
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} loaded from ${FILE}"

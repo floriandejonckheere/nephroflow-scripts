@@ -8,6 +8,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [jq](https://stedolan.github.io/jq/)
 - [curl](https://curl.se/)
 - [git](https://git-scm.com/)
+- [gzip](https://www.gnu.org/software/gzip/)
 - [Docker](https://www.docker.com/)
 - [Kubernetes](https://kubernetes.io/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)

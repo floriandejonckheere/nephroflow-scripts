@@ -26,6 +26,8 @@ function nf_db_restore() {
     return 1
   fi
 
+  echo "Restoring database ${NF_DB_PREFIX}${DATABASE} from ${LATEST} (version ${VERSION})"
+
   nf_db_copy "${LATEST}" "${DATABASE}" > /dev/null
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} restored from ${LATEST} (version ${VERSION})"

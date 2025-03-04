@@ -7,6 +7,8 @@ function nf_db_create() {
   fi
 
   for DATABASE in "${@}"; do
+    echo "Creating database ${NF_DB_PREFIX}${DATABASE}"
+
     nf_db -c "CREATE DATABASE ${NF_DB_PREFIX}${DATABASE}" > /dev/null
 
     echo "Database ${NF_DB_PREFIX}${DATABASE} created"

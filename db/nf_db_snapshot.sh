@@ -10,6 +10,8 @@ function nf_db_snapshot() {
   DATABASE=${1#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
 
+  echo "Creating snapshot of database ${NF_DB_PREFIX}${DATABASE} (version ${VERSION})"
+
   nf_db_copy "${DATABASE}" "${DATABASE}_${VERSION}_$(date +%Y%m%d)" > /dev/null
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} snapshot ${DATABASE}_${VERSION}_$(date +%Y%m%d) created"
