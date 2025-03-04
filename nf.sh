@@ -13,8 +13,8 @@ export NF_SERVER=http://localhost:3000
 # Path to directory containing the repositories
 export NF_PATH=~/Code
 
-# Path to the NephroFlow CLI
-export NF_PATH_CLI="${HOME}/.nipro"
+# Path to the NephroFlow scripts
+export NF_PATH_CLI="${HOME}/.nf"
 
 # Database prefix
 export NF_DB_PREFIX=nephroflow_
@@ -71,7 +71,7 @@ nf_category k8s "Kubernetes functions"
 nf_category az "Azure functions"
 
 function nf_help() {
-  echo "NephroFlow CLI ${NF_VERSION}"
+  echo "NephroFlow Scripts ${NF_VERSION}"
 
   # Loop over categories, and print functions in each category
   for CATEGORY in ${(k)NF_CATEGORIES}; do

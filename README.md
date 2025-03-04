@@ -29,13 +29,13 @@ git clone https://github.com/nephroflow/link.git
 Clone the repository:
 
 ```bash
-git clone https://github.com/floriandejonckheere/nipro ~/.nipro/
+git clone https://github.com/floriandejonckheere/nephroflow-scripts ~/.nf/
 ```
 
 Add the following line to your `.zshrc` file:
 
 ```bash
-source ~/.nipro/nf.sh
+source ~/.nf/nf.sh
 ```
 
 ## Usage
@@ -60,4 +60,4 @@ nf_v 19.1
 
 ## License
 
-Copyright 2025 Nipro Digital Technologies Europe.
+(C) 2025 [Nipro Digital Technologies Europe](https://niprodigital.com/).
