@@ -10,7 +10,13 @@ function nf_k_db() {
 
   shift
 
-  POD=$(kubectl get pods -n "${NAMESPACE}" -l app=api -o jsonpath='{.items[0].metadata.name}')
+  POD=$(kubectl get pods -n "${NAMESPACE}" | grep 'api-\|debug-' | head -1 | awk '{print $1}')
+
+  if [[ -z ${POD} ]]; then
+    echo "No api or debug pod found in ${NAMESPACE} namespace"
+
+    return 1
+  fi
 
   kubectl exec -ti -n "${NAMESPACE}" "${POD}" -- bash -c "eval 'PGPASSWORD=\${PG_PASSWORD} psql -P pager -h \${PG_HOST} -p \${PG_PORT} -U \${PG_USERNAME} -d \${PG_DATABASE}'"
 }
