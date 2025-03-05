@@ -70,6 +70,17 @@ apt install -y build-essential libcurl4-openssl-dev git libxml2-dev libxslt-dev 
 bundle
 ```
 
+If the PostgreSQL versions do not match, install the correct client version with:
+
+```bash
+apt update
+apt install -y lsb-release wget
+echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+apt update
+apt install -y postgresql-client-16
+```
+
 ## License
 
 (C) 2025 [Nipro Digital Technologies Europe](https://niprodigital.com/).
