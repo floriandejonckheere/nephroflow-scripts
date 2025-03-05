@@ -50,7 +50,7 @@ nf_help
 
 This repository contains bare Docker compose files to run older versions of the NephroFlow API.
 The compose files share the project name with the current version of the API, so the database and Redis containers will be shared.
-Please ensure the database has the correct database version.
+The database name is suffixed with the version (e.g. `nephroflow_development_19_1`).
 
 To start a container with a specific version of the NephroFlow API, use the following command:
 

@@ -15,7 +15,7 @@ services:
       PG_HOST: postgres
       PG_USERNAME: postgres
       PG_PASSWORD: postgres
-      PG_DATABASE: nephroflow_development
+      PG_DATABASE: nephroflow_development_20
       RAILS_ENV: development
       SECRET_KEY_BASE: development_secret
       REDIS_URL: redis://redis:6379/0
