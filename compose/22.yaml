@@ -22,6 +22,9 @@ services:
       ACCESS_CONTROL_ALLOW_ORIGIN: http://localhost:8080
       MAILER_HOST: http://127.0.0.1:3000
       MAILER_SENDER: noreply@niprodigital.com
+      DEFAULT_LOCALE: en
+      COUNTRY: BE
+      TIME_ZONE: Europe/Brussels
 
   postgres:
     image: postgres:16
