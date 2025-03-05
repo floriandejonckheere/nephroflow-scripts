@@ -11,6 +11,6 @@ function nf_k_scale() {
   fi
 
   echo "Scaling ${POD} pod to ${REPLICAS} in ${NAMESPACE}"
-  kubectl scale deployment "${POD}" --namespace="${NAMESPACE}" --replicas="${REPLICAS}"
-  echo "Scaled ${POD} pod to ${REPLICAS} in ${NAMESPACE}"
+  kubectl scale deployment "${POD}" --namespace="${NAMESPACE}" --replicas="${REPLICAS}" > /dev/null
+  echo "Pod scaled"
 }

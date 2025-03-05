@@ -18,5 +18,6 @@ function nf_k_db() {
     return 1
   fi
 
+  echo "Opening database console on ${NAMESPACE}"
   kubectl exec -ti -n "${NAMESPACE}" "${POD}" -- bash -c "eval 'PGPASSWORD=\${PG_PASSWORD} psql -P pager -h \${PG_HOST} -p \${PG_PORT} -U \${PG_USERNAME} -d \${PG_DATABASE}'"
 }
