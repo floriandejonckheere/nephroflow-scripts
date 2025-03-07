@@ -24,7 +24,7 @@ migrations.map! { |l| l.tr(";", ",") }
 
 # Sort and deduplicate
 migrations.sort!
-migrations.reverse! if REVERSE
+migrations.reverse! unless REVERSE
 migrations.uniq!
 
 # Add semicolon to last statement
