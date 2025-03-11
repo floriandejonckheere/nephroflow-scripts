@@ -4,7 +4,7 @@ function nf_tsh_auth() {
   ROLE=${2:-"customer-access"} # customer-access, demo-access
 
   if [[ ! ${REASON} || ! ${ROLE} ]]; then
-    echo "Usage: ${0} REASON ROLE"
+    echo "Usage: ${0} REASON [ROLE]"
 
     return 1
   fi
