@@ -8,6 +8,7 @@ services:
     volumes:
       - ${NF_PATH}/nephroflow-api:/srv:cached
       - ${HOME}/.bundle/config:/usr/local/bundle/config
+      - bundle_20:/usr/local/bundle
     depends_on:
       - postgres
       - redis
@@ -42,3 +43,4 @@ services:
 volumes:
   postgres:
   redis:
+  bundle_20:
