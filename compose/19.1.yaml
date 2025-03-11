@@ -2,7 +2,7 @@ name: nephroflow
 
 services:
   web:
-    image: nephroflow.azurecr.io/api:v19.1.27
+    image: nephroflow.azurecr.io/api:v19.1.29
     platform: linux/amd64
     user: root
     volumes:
