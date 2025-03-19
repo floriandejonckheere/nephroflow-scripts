@@ -74,7 +74,7 @@ If the PostgreSQL versions do not match, install the correct client version with
 
 ```bash
 apt update
-apt install -y lsb-release wget
+apt install -y lsb-release wget gnupg
 echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 apt update
