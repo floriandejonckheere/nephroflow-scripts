@@ -46,7 +46,7 @@ function nf_rel_bump() {
     {
       print
     }
-  ' CHANGELOG.md > "${FILE}"
+  ' "${NF_PATH}/${REPOSITORY}/CHANGELOG.md" > "${FILE}"
 
   # Move the temporary file back to CHANGELOG.md
   mv "${FILE}" "${NF_PATH}/${REPOSITORY}/CHANGELOG.md"

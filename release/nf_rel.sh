@@ -1,4 +1,4 @@
-nf_function nf_rel release "Release a new version"
+nf_function nf_rel release "Bump the version in CHANGELOG.md and create a pull request for the release branch"
 function nf_rel() {(set -e
   REPOSITORY=${1:-nephroflow-api}
   RELEASE=${2}
@@ -20,7 +20,7 @@ function nf_rel() {(set -e
 
   echo "Creating release v${NEW_VERSION}"
   git -C "${NF_PATH}/${REPOSITORY}" checkout -b "$(nf_initials)/v${NEW_VERSION}"
-  git -C "${NF_PATH}/${REPOSITORY}" add CHANGELOG.md
+  git -C "${NF_PATH}/${REPOSITORY}" add "${NF_PATH}/${REPOSITORY}/CHANGELOG.md"
   git -C "${NF_PATH}/${REPOSITORY}" commit -m "Bump version to v${NEW_VERSION}"
   git -C "${NF_PATH}/${REPOSITORY}" push origin "$(nf_initials)/v${NEW_VERSION}"
 
