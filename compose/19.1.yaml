@@ -26,6 +26,8 @@ services:
       DEFAULT_LOCALE: en
       COUNTRY: BE
       TIME_ZONE: Europe/Brussels
+    ports:
+      - "3000:3000"
 
   postgres:
     image: postgres:16
