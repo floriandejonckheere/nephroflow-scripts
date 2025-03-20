@@ -23,6 +23,17 @@ function nf_v() {
     return 1
   fi
 
+  echo "Checking out NephroFlow version ${VERSION} at ${NF_PATH}/nephroflow-api"
+  git -C "${NF_PATH}/nephroflow-api" fetch --all || {
+    echo "Error: Failed to fetch latest changes from remote repository"
+    return 1
+  }
+
+  git -C "${NF_PATH}/nephroflow-api" checkout "origin/release/v${VERSION}" || {
+    echo "Error: Failed to checkout NephroFlow version ${VERSION}"
+    return 1
+  }
+
   echo "Starting NephroFlow API container (version: ${VERSION})"
-  docker compose -f "${COMPOSE_FILE}" run --rm --service-ports web "${COMMAND}"
+  docker compose -f "${COMPOSE_FILE}" run --name "nephroflow-web-${VERSION}" --service-ports web "${COMMAND}"
 }
