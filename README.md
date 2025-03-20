@@ -38,6 +38,12 @@ Add the following line to your `.zshrc` file:
 source ~/.nf/nf.sh
 ```
 
+And configure your initials:
+
+```bash
+nf_initials <your_initials>
+```
+
 ## Usage
 
 Use the `nf_help` command to get an overview of all available commands.

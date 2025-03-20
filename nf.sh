@@ -23,6 +23,8 @@ export NF_DB_PREFIX=nephroflow_
 declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
+export NF_INITIALS=
+
 ##
 # Help and usage
 #
@@ -120,6 +122,31 @@ function nf_curl_options() {
   NF_CURL_OPTIONS=(${=@:-"--silent" "--fail" "--show-error"})
 
   echo "cURL options set to ${NF_CURL_OPTIONS[*]}"
+}
+
+nf_function nf_initials configuration "Get or set initials for the current user"
+function nf_initials() {
+  INITIALS=${1}
+
+  if [[ -z ${INITIALS} ]]; then
+    if [[ -z ${NF_INITIALS} ]]; then
+      echo "Initials not set. Please configure your initials using 'nf_initials <initials>'"
+
+      return 1
+    fi
+
+    echo "${NF_INITIALS}"
+  else
+    if [[ ! ${INITIALS} =~ ^[a-zA-Z]{2,3}$ ]]; then
+      echo "Error: Initials must be 2 or 3 letters"
+
+      return 1
+    fi
+
+    export NF_INITIALS=${INITIALS}
+
+    echo "Initials set to ${INITIALS}"
+  fi
 }
 
 ##
