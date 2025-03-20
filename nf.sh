@@ -34,6 +34,9 @@ declare -A NF_CATEGORIES
 unset NF_FUNCTIONS
 declare -A NF_FUNCTIONS
 
+unset NF_USAGE
+declare -A NF_USAGE
+
 unset NF_CATEGORIES_TO_FUNCTIONS
 declare -A NF_CATEGORIES_TO_FUNCTIONS
 
@@ -60,6 +63,26 @@ function nf_function() {
   fi
 }
 
+function nf_usage() {
+  NAME=${1}
+  USAGE=${2}
+
+  if [[ -z ${NAME} || -z ${USAGE} ]]; then
+    echo "Usage: ${0} NAME USAGE"
+
+    return 1
+  fi
+
+  if [[ ! ${NF_FUNCTIONS[${NAME}]} ]]; then
+    echo "Error: ${NAME} is not a valid function"
+
+    return 1
+  fi
+
+  # Add to usage list
+  NF_USAGE[${NAME}]="${USAGE}"
+}
+
 # Define categories
 nf_category helper "Helper functions"
 nf_category configuration "Configuration functions"
@@ -73,23 +96,31 @@ nf_category k8s "Kubernetes functions"
 nf_category az "Azure functions"
 
 function nf_help() {
-  echo "NephroFlow Scripts ${NF_VERSION}"
+  COMMAND=${1}
 
-  # Loop over categories, and print functions in each category
-  for CATEGORY in ${(k)NF_CATEGORIES}; do
-    printf "\n%s\n" "${NF_CATEGORIES[${CATEGORY}]}"
+  if [[ -z ${COMMAND} ]]; then
+    echo "NephroFlow Scripts ${NF_VERSION}"
 
-    # Loop over functions in category
-    for FUNCTION in ${(s: :)NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]}; do
-      printf "  %-30s %s\n" "${FUNCTION}" "${NF_FUNCTIONS[${FUNCTION}]}"
+    # Loop over categories, and print functions in each category
+    for CATEGORY in ${(k)NF_CATEGORIES}; do
+      printf "\n%s\n" "${NF_CATEGORIES[${CATEGORY}]}"
+
+      # Loop over functions in category
+      for FUNCTION in ${(s: :)NF_CATEGORIES_TO_FUNCTIONS[${CATEGORY}]}; do
+        printf "  %-30s %s\n" "${FUNCTION}" "${NF_FUNCTIONS[${FUNCTION}]}"
+      done
     done
-  done
+  else
+    echo "${COMMAND}: ${NF_FUNCTIONS[${COMMAND}]}"
+    echo "Usage: ${COMMAND} ${NF_USAGE[${COMMAND}]}"
+  fi
 }
 
 ##
 # Configuration functions
 #
 nf_function nf_server configuration "Set API server (default: http://localhost:3000)"
+nf_usage nf_server "[SERVER]"
 function nf_server() {
   SERVER=${1:-http://localhost:3000}
 
@@ -99,6 +130,7 @@ function nf_server() {
 }
 
 nf_function nf_path configuration "Set repositories path (default: ~/Code)"
+nf_usage nf_path "[PATH]"
 function nf_path() {
   _PATH=${1:-~/Code}
 
@@ -108,6 +140,7 @@ function nf_path() {
 }
 
 nf_function nf_db_prefix configuration "Set database prefix (default: nephroflow_)"
+nf_usage nf_db_prefix "[PREFIX]"
 function nf_db_prefix() {
   PREFIX=${1:-nephroflow_}
 
@@ -117,6 +150,7 @@ function nf_db_prefix() {
 }
 
 nf_function nf_curl_options configuration "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
+nf_usage nf_curl_options "[OPTIONS]"
 function nf_curl_options() {
   # shellcheck disable=SC2206
   NF_CURL_OPTIONS=(${=@:-"--silent" "--fail" "--show-error"})
@@ -125,6 +159,7 @@ function nf_curl_options() {
 }
 
 nf_function nf_initials configuration "Get or set initials for the current user"
+nf_usage nf_initials "[INITIALS]"
 function nf_initials() {
   INITIALS=${1}
 
@@ -153,6 +188,7 @@ function nf_initials() {
 # Helper functions
 #
 nf_function nf_compose helper "Run docker compose command"
+nf_usage nf_compose "COMMAND"
 function nf_compose() {
   COMPOSE_FILE="${NF_PATH}/nephroflow-api/compose.yaml"
 
@@ -170,6 +206,7 @@ function nf_compose() {
 }
 
 nf_function nf_url helper "Strip protocol, ://, hostname, port, and /api from URL"
+nf_usage nf_url "URL"
 function nf_url() {
   URL=${1}
 
@@ -186,6 +223,7 @@ function nf_url() {
 }
 
 nf_function until_fail helper "Run a command until it fails"
+nf_usage until_fail "COMMAND"
 function until_fail() {
   while "$@"; do :; done
 }
