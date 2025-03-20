@@ -25,13 +25,13 @@ function nf_rel() {(set -e
   git -C "${NF_PATH}/${REPOSITORY}" push origin "$(nf_initials)/v${NEW_VERSION}"
 
   # Create a pull request
-  gh pr create \
+  (cd "${NF_PATH}/${REPOSITORY}"; gh pr create \
     --assignee "@me" \
     --base "release/v${RELEASE}" \
     --head "$(nf_initials)/v${NEW_VERSION}" \
     --title "[R${RELEASE}] Bump version to v${NEW_VERSION}" \
     --body "Bump version to v${NEW_VERSION}." \
-    --reviewer "nephroflow/engineering"
+    --reviewer "nephroflow/engineering")
 
   echo "Release v${NEW_VERSION} pull request created successfully"
 )}
