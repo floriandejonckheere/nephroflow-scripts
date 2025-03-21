@@ -42,7 +42,7 @@ source ~/.nf/nf.sh
 And configure your initials:
 
 ```bash
-nf_initials <your_initials>
+nf_initials <your_initials> > /dev/null
 ```
 
 ## Usage
