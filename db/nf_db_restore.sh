@@ -12,7 +12,7 @@ function nf_db_restore() {
   VERSION=${VERSION%_0}
 
   # Find latest snapshot
-  LATEST=$(nf_db_ls | grep "${DATABASE}_${VERSION}_" | sort -r | head -n 1)
+  LATEST=$(nf_db_ls | cut -d '|' -f1 | grep "${DATABASE}_${VERSION}_" | sort -r | head -n 1)
 
   if [[ "${LATEST}" == "" ]]; then
     echo "Error: No snapshots found for ${NF_DB_PREFIX}${DATABASE} version ${VERSION}"
@@ -20,7 +20,7 @@ function nf_db_restore() {
     return 1
   fi
 
-  if [[ $(nf_db_ls | grep "${NF_DB_PREFIX}${DATABASE}$") != "" ]]; then
+  if [[ $(nf_db_ls | cut -d '|' -f1 | grep "${NF_DB_PREFIX}${DATABASE}$") != "" ]]; then
     echo "Error: Database ${NF_DB_PREFIX}${DATABASE} already exists"
 
     return 1
