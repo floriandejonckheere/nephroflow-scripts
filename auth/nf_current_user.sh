@@ -1,4 +1,4 @@
-nf_function nf_current_user authentication "Return the username of the user currently signed in"
+nf_function nf_current_user auth "Return the username of the user currently signed in"
 function nf_current_user() {
   if [[ ! ${ACCESS_TOKEN} ]]; then
     echo "Not signed in"

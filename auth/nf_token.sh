@@ -1,4 +1,4 @@
-nf_function nf_token authentication "Find or create an integration token and set token environment variables (default scope: link)"
+nf_function nf_token auth "Find or create an integration token and set token environment variables (default scope: link)"
 function nf_token() {
   SCOPE=${1:-"link"}
   NAME="${SCOPE}-${RANDOM}"

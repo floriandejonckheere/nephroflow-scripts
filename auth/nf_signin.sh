@@ -1,4 +1,4 @@
-nf_function nf_signin authentication "Sign in as a user and set token environment variables (default username: henry.davidson)"
+nf_function nf_signin auth "Sign in as a user and set token environment variables (default username: henry.davidson)"
 function nf_signin() {
   USER=${1:-henry.davidson}
   PASSWORD=${2:-password}

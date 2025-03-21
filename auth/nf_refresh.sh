@@ -1,4 +1,4 @@
-nf_function nf_refresh authentication "Refresh the access token using the refresh token"
+nf_function nf_refresh auth "Refresh the access token using the refresh token"
 function nf_refresh() {
   OPTIONS=(${@})
 

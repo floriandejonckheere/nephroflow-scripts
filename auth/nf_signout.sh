@@ -1,4 +1,4 @@
-nf_function nf_signout authentication "Sign out and clear token environment variables"
+nf_function nf_signout auth "Sign out and clear token environment variables"
 function nf_signout() {
   OPTIONS=(${@})
 

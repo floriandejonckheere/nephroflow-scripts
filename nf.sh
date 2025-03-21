@@ -85,8 +85,8 @@ function nf_usage() {
 
 # Define categories
 nf_category helper "Helper functions"
-nf_category configuration "Configuration functions"
-nf_category authentication "Authentication functions"
+nf_category config "Configuration functions"
+nf_category auth "Authentication functions"
 nf_category http "HTTP functions"
 nf_category database "Database functions"
 nf_category docker "Docker functions"
@@ -119,7 +119,7 @@ function nf_help() {
 ##
 # Configuration functions
 #
-nf_function nf_server configuration "Set API server (default: http://localhost:3000)"
+nf_function nf_server config "Set API server (default: http://localhost:3000)"
 nf_usage nf_server "[SERVER]"
 function nf_server() {
   SERVER=${1:-http://localhost:3000}
@@ -129,7 +129,7 @@ function nf_server() {
   echo "API server set to ${SERVER}"
 }
 
-nf_function nf_path configuration "Set repositories path (default: ~/Code)"
+nf_function nf_path config "Set repositories path (default: ~/Code)"
 nf_usage nf_path "[PATH]"
 function nf_path() {
   _PATH=${1:-~/Code}
@@ -139,7 +139,7 @@ function nf_path() {
   echo "Repositories path set to ${_PATH}"
 }
 
-nf_function nf_db_prefix configuration "Set database prefix (default: nephroflow_)"
+nf_function nf_db_prefix config "Set database prefix (default: nephroflow_)"
 nf_usage nf_db_prefix "[PREFIX]"
 function nf_db_prefix() {
   PREFIX=${1:-nephroflow_}
@@ -149,7 +149,7 @@ function nf_db_prefix() {
   echo "Database prefix set to ${PREFIX}"
 }
 
-nf_function nf_curl_options configuration "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
+nf_function nf_curl_options config "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
 nf_usage nf_curl_options "[OPTIONS]"
 function nf_curl_options() {
   # shellcheck disable=SC2206
@@ -158,7 +158,7 @@ function nf_curl_options() {
   echo "cURL options set to ${NF_CURL_OPTIONS[*]}"
 }
 
-nf_function nf_initials configuration "Get or set initials for the current user"
+nf_function nf_initials config "Get or set initials for the current user"
 nf_usage nf_initials "[INITIALS]"
 function nf_initials() {
   INITIALS=${1}
