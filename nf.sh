@@ -185,56 +185,6 @@ function nf_initials() {
 }
 
 ##
-# Helper functions
-#
-nf_function nf_compose helper "Run docker compose command"
-nf_usage nf_compose "COMMAND"
-function nf_compose() {
-  COMPOSE_FILE="${NF_PATH}/nephroflow-api/compose.yaml"
-
-  if [[ ! -f ${COMPOSE_FILE} ]]; then
-    COMPOSE_FILE="${NF_PATH}/nephroflow-api/docker-compose.yml"
-  fi
-
-  if [[ ! -f ${COMPOSE_FILE} ]]; then
-    echo "Error: ${COMPOSE_FILE} not found"
-
-    return 1
-  fi
-
-  docker compose -f "${COMPOSE_FILE}" "${@}"
-}
-
-nf_function nf_url helper "Strip protocol, ://, hostname, port, and /api from URL"
-nf_usage nf_url "URL"
-function nf_url() {
-  URL=${1}
-
-  if [[ ! ${URL} ]]; then
-    echo "Usage: ${0} URL"
-
-    return 1
-  fi
-
-  # Strip protocol, ://, hostname, port, and /api
-  URL=$(echo "${URL}" | sed -E 's/^\s*(.*:\/\/)?[^\/]*\/?api\/?//g')
-
-  echo "${URL}"
-}
-
-nf_function until_fail helper "Run a command until it fails"
-nf_usage until_fail "COMMAND"
-function until_fail() {
-  while "$@"; do :; done
-}
-
-nf_function nf_reload helper "Reload all scripts"
-function nf_reload() {
-  source "${NF_PATH_CLI}/nf.sh"
-  echo "Reloaded all scripts"
-}
-
-##
 # Load all scripts in the current directory
 #
 for FILE in $(find "${NF_PATH_CLI}" -name '*.sh' -not -path '*/nf.sh'); do
