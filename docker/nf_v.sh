@@ -24,13 +24,13 @@ function nf_v() {
   fi
 
   echo "Checking out NephroFlow version ${VERSION} at ${NF_PATH}/nephroflow-api"
-  git -C "${NF_PATH}/nephroflow-api" fetch --all || {
-    echo "Error: Failed to fetch latest changes from remote repository"
+  git -C "${NF_PATH}/nephroflow-api" checkout "release/v${VERSION}" || {
+    echo "Error: Failed to checkout NephroFlow release branch version ${VERSION}"
     return 1
   }
 
-  git -C "${NF_PATH}/nephroflow-api" checkout "origin/release/v${VERSION}" || {
-    echo "Error: Failed to checkout NephroFlow version ${VERSION}"
+  git -C "${NF_PATH}/nephroflow-api" pull --ff-only || {
+    echo "Error: Failed to fetch latest changes from remote repository"
     return 1
   }
 
