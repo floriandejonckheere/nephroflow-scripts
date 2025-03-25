@@ -24,17 +24,27 @@ function nf_db_load() {
     return 1
   fi
 
-  echo "Loading database ${NF_DB_PREFIX}${DATABASE} from ${FILE}"
+  # Decompress file if necessary
+  if [[ "${FILE}" == *.gz ]]; then
+    gunzip -c "${FILE}" > "${FILE%.gz}"
+    FILE="${FILE%.gz}"
+  fi
 
-  if [[ "${FILE}" == *.sql ]]; then
-    # If the file is a .sql file, use psql to load it
-    nf_compose exec -T postgres psql -U postgres "${NF_DB_PREFIX}${DATABASE}" < "${FILE}" || {
+
+  TYPE=$(file -b "${FILE}")
+  if [[ "${TYPE}" == *"PostgreSQL custom database dump"* ]]; then
+    # Use pg_restore for custom format
+    echo "Loading database ${NF_DB_PREFIX}${DATABASE} from ${FILE} using pg_restore"
+
+    nf_compose exec -T postgres pg_restore -U postgres -d "${NF_DB_PREFIX}${DATABASE}" < "${FILE}" > /dev/null || {
       echo "Failed to load database ${NF_DB_PREFIX}${DATABASE} from ${FILE}"
       return 1
     }
   else
-    # If the file is a .gz file, use gunzip to decompress it and then pipe it to psql
-    gunzip -c "${FILE}" | nf_compose exec -T postgres psql -U postgres "${NF_DB_PREFIX}${DATABASE}" > /dev/null || {
+    # Use psql for plain text format
+    echo "Loading database ${NF_DB_PREFIX}${DATABASE} from ${FILE} using psql"
+
+    nf_compose exec -T postgres psql -U postgres "${NF_DB_PREFIX}${DATABASE}" < "${FILE}" > /dev/null || {
       echo "Failed to load database ${NF_DB_PREFIX}${DATABASE} from ${FILE}"
       return 1
     }
