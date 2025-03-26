@@ -89,6 +89,35 @@ apt update
 apt install -y postgresql-client-16
 ```
 
+## Development
+
+Add new commands to their respective file in the respective folder (category).
+Use the following template to add a new command:
+
+```sh
+# nf_function <name> <category> <description>
+nf_function nf_my_func helpers "My helper function"
+function nf_my_func() {
+  ONE=${1}
+  TWO=${2:-"Default value"}
+
+  if [[ -z ${ONE} ]]; then
+    echo "Usage: ${0} ONE [TWO]"
+
+    return 1
+  fi
+  
+  # Function body
+}
+
+# If you want the function to fail if a command fails, wrap it in set -e
+function nf_my_func() {(set -e
+  # Function body
+)}
+```
+
+Then, open a pull request to the `main` branch of this repository.
+
 ## License
 
 (C) 2025 [Nipro Digital Technologies Europe](https://niprodigital.com/).
