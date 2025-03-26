@@ -39,9 +39,10 @@ Add the following line to your `.zshrc` file:
 source ~/.nf/nf.sh
 ```
 
-And configure your initials:
+And configure your machine-specific settings:
 
 ```bash
+nf_path <path_to_your_repositories>
 nf_initials <your_initials> > /dev/null
 ```
 
