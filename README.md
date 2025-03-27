@@ -111,7 +111,7 @@ function nf_my_func() {
 }
 
 # If you want the function to fail if a command fails, wrap it in set -e
-function nf_my_func() {(set -e
+function nf_my_func() {(set -euo pipefail
   # Function body
 )}
 ```

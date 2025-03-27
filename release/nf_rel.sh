@@ -1,5 +1,5 @@
 nf_function nf_rel release "Bump the version in CHANGELOG.md and create a pull request for the release branch"
-function nf_rel() {(set -e
+function nf_rel() {(set -euo pipefail
   REPOSITORY=${1:-nephroflow-api}
   RELEASE=${2}
 
