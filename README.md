@@ -6,6 +6,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 
 - [Zsh](https://www.zsh.org)
 - [jq](https://stedolan.github.io/jq/)
+- [yq](https://github.com/mikefarah/yq)
 - [curl](https://curl.se/)
 - [git](https://git-scm.com/)
 - [gzip](https://www.gnu.org/software/gzip/)
