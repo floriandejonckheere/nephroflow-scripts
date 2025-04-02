@@ -35,5 +35,5 @@ function nf_v() {
   }
 
   echo "Starting NephroFlow API container (version: ${VERSION})"
-  docker compose -f "${COMPOSE_FILE}" run --name "nephroflow-web-${VERSION}" --service-ports web "${COMMAND}"
+  docker compose -f "${COMPOSE_FILE}" run --rm --name "nephroflow-web-${VERSION}" --service-ports web "${COMMAND}"
 }
