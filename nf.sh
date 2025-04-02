@@ -23,7 +23,7 @@ export NF_DB_PREFIX=nephroflow_
 declare -a NF_CURL_OPTIONS
 export NF_CURL_OPTIONS=(--silent --fail --show-error)
 
-export NF_INITIALS=
+export NF_INITIALS
 
 ##
 # Help and usage
