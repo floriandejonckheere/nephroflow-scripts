@@ -1,0 +1,28 @@
+name: link
+
+services:
+  link:
+    image: nephroflow.azurecr.io/link:v5.3.2
+    platform: linux/amd64
+    user: root
+    volumes:
+      - ${NF_PATH}/link:/srv:cached
+      - ${HOME}/.bundle/config:/usr/local/bundle/config
+      - bundle_5_3:/usr/local/bundle
+    depends_on:
+      - valkey
+    environment:
+      LINK_ENV: development
+      TIME_ZONE: Europe/Brussels
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
+      REDIS_URL: redis://valkey:6379/0
+      LOG_LEVEL: debug
+
+  valkey:
+    image: valkey/valkey:8.0.1-alpine
+    volumes:
+      - valkey:/data/
+
+volumes:
+  bundle_5_3:
+  valkey:
