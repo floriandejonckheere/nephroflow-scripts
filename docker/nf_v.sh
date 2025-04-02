@@ -15,7 +15,7 @@ function nf_v() {
     return 1
   fi
 
-  COMPOSE_FILE="${NF_PATH_CLI}/compose/${VERSION}.yaml"
+  COMPOSE_FILE="${NF_PATH_CLI}/compose/api/${VERSION}.yaml"
 
   if [[ ! -f "${COMPOSE_FILE}" ]]; then
     echo "Error: ${COMPOSE_FILE} not found"
