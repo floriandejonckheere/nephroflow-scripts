@@ -14,6 +14,7 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [Kubernetes](https://kubernetes.io/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - [Github CLI](https://cli.github.com/)
+- [GNU sed](https://www.gnu.org/software/sed/)
 
 Clone the relevant repositories to your local machine:
 
