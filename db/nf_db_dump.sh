@@ -1,5 +1,5 @@
 nf_function nf_db_dump database "Dump a database to a file"
-function nf_db_dump() {
+function nf_db_dump() {(set -euo pipefail
   # Remove prefix
   DATABASE=${1#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
@@ -18,4 +18,4 @@ function nf_db_dump() {
   nf_compose exec postgres pg_dump -U postgres "${NF_DB_PREFIX}${DATABASE}" | gzip > "${FILE}"
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} dumped to ${FILE}"
-}
+)}

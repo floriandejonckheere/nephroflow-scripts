@@ -1,5 +1,5 @@
 nf_function nf_db_restore database "Restore (copy) the latest snapshot of a database (by version)"
-function nf_db_restore() {
+function nf_db_restore() {(set -euo pipefail
     # Remove prefix
   DATABASE=${1#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
@@ -31,4 +31,4 @@ function nf_db_restore() {
   nf_db_copy "${LATEST}" "${DATABASE}" > /dev/null
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} restored from ${LATEST} (version ${VERSION})"
-}
+)}

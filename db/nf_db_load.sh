@@ -1,5 +1,5 @@
 nf_function nf_db_load database "Load a database from a file"
-function nf_db_load() {
+function nf_db_load() {(set -euo pipefail
   # Remove prefix
   DATABASE=${1#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
@@ -51,4 +51,4 @@ function nf_db_load() {
   fi
 
   echo "Database ${NF_DB_PREFIX}${DATABASE} loaded from ${FILE}"
-}
+)}

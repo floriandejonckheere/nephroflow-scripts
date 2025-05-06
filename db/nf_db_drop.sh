@@ -1,5 +1,5 @@
 nf_function nf_db_drop database "Drop a database"
-function nf_db_drop() {
+function nf_db_drop() {(set -euo pipefail
   if [[ ! ${1} ]]; then
     echo "Usage: ${0} DATABASE ..."
 
@@ -16,4 +16,4 @@ function nf_db_drop() {
 
     echo "Database ${NF_DB_PREFIX}${DATABASE} dropped"
   done
-}
+)}
