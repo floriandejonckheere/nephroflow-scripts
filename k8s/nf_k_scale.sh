@@ -1,5 +1,5 @@
 nf_function nf_k_scale k8s "Scale a pod up or down (default: debug pod)"
-function nf_k_scale() {
+function nf_k_scale() {(set -euo pipefail
   NAMESPACE=${1}
   POD=${2:-debug}
   REPLICAS=${3:-1}
@@ -13,4 +13,4 @@ function nf_k_scale() {
   echo "Scaling ${POD} pod to ${REPLICAS} in ${NAMESPACE}"
   kubectl scale deployment "${POD}" --namespace="${NAMESPACE}" --replicas="${REPLICAS}" > /dev/null
   echo "Pod scaled"
-}
+)}
