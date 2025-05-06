@@ -28,16 +28,9 @@ export NF_INITIALS
 ##
 # Help and usage
 #
-unset NF_CATEGORIES
 declare -A NF_CATEGORIES
-
-unset NF_FUNCTIONS
 declare -A NF_FUNCTIONS
-
-unset NF_USAGE
 declare -A NF_USAGE
-
-unset NF_CATEGORIES_TO_FUNCTIONS
 declare -A NF_CATEGORIES_TO_FUNCTIONS
 
 function nf_category() {
