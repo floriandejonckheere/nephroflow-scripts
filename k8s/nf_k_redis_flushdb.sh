@@ -1,9 +1,9 @@
-nf_function nf_k_redis_flushdb k8s "database" "Flush remote Redis database"
+nf_function nf_k_redis_flushdb k8s "Flush remote Redis database"
 function nf_k_redis_flushdb() {(set -euo pipefail
-  NAMESPACE=${1}
+  NAMESPACE=${1:-$(nf_k_ns)}
 
   if [[ -z ${NAMESPACE} ]]; then
-    echo "Usage: ${0} NAMESPACE"
+    echo "Usage: ${0} [NAMESPACE]"
 
     return 1
   fi

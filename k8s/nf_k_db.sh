@@ -1,14 +1,12 @@
 nf_function nf_k_db database "Open a database console on a remote database"
 function nf_k_db() {(set -euo pipefail
-  NAMESPACE=${1}
+  NAMESPACE=${1:-$(nf_k_ns)}
 
   if [[ -z ${NAMESPACE} ]]; then
-    echo "Usage: ${0} NAMESPACE"
+    echo "Usage: ${0} [NAMESPACE]"
 
     return 1
   fi
-
-  shift
 
   POD=$(kubectl get pods -n "${NAMESPACE}" | grep 'api-\|debug-' | head -1 | awk '{print $1}')
 
