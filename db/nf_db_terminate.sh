@@ -1,9 +1,10 @@
 nf_function nf_db_terminate database "Terminate all connections to a database"
 function nf_db_terminate() {(set -euo pipefail
-  DATABASE=${1:-development}
+  DATABASE=${1:-""}
 
   # Remove prefix
   DATABASE=${DATABASE#"${NF_DB_PREFIX}"}
+  DATABASE=${DATABASE:-development}
 
   echo "Terminating all connections to database ${NF_DB_PREFIX}${DATABASE}"
 

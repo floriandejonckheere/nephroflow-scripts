@@ -1,10 +1,13 @@
 nf_function nf_db_copy database "Copy a database"
 function nf_db_copy() {(set -euo pipefail
-  # Remove prefix
-  OLD_DATABASE=${1#"${NF_DB_PREFIX}"}
-  NEW_DATABASE=${2#"${NF_DB_PREFIX}"}
+  OLD_DATABASE=${1:-""}
+  NEW_DATABASE=${2:-""}
 
-  if [[ ! ${OLD_DATABASE} || ! ${NEW_DATABASE} ]]; then
+  # Remove prefix
+  OLD_DATABASE=${OLD_DATABASE#"${NF_DB_PREFIX}"}
+  NEW_DATABASE=${NEW_DATABASE#"${NF_DB_PREFIX}"}
+
+  if [[ -z ${OLD_DATABASE} || -z ${NEW_DATABASE} ]]; then
     echo "Usage: ${0} OLD_DATABASE NEW_DATABASE"
 
     return 1

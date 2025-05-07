@@ -1,7 +1,9 @@
 nf_function nf_db_restore database "Restore (copy) the latest snapshot of a database (by version)"
 function nf_db_restore() {(set -euo pipefail
-    # Remove prefix
-  DATABASE=${1#"${NF_DB_PREFIX}"}
+  DATABASE=${1:-""}
+
+  # Remove prefix
+  DATABASE=${DATABASE#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
 
   # NephroFlow major version

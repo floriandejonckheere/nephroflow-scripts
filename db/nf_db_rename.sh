@@ -1,8 +1,11 @@
 nf_function nf_db_rename database "Rename a database"
 function nf_db_rename() {(set -euo pipefail
+  OLD_DATABASE=${1:-""}
+  NEW_DATABASE=${2:-""}
+
   # Remove prefix
-  OLD_DATABASE=${1#"${NF_DB_PREFIX}"}
-  NEW_DATABASE=${2#"${NF_DB_PREFIX}"}
+  OLD_DATABASE=${OLD_DATABASE#"${NF_DB_PREFIX}"}
+  NEW_DATABASE=${NEW_DATABASE#"${NF_DB_PREFIX}"}
 
   if [[ ! ${OLD_DATABASE} || ! ${NEW_DATABASE} ]]; then
     echo "Usage: ${0} OLD_DATABASE NEW_DATABASE"

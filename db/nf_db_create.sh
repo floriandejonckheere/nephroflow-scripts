@@ -1,6 +1,6 @@
 nf_function nf_db_create database "Create an empty database"
 function nf_db_create() {(set -euo pipefail
-  if [[ ! ${1} ]]; then
+  if [[ -z ${@} ]]; then
     echo "Usage: ${0} DATABASE ..."
 
     return 1

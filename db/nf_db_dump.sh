@@ -1,7 +1,9 @@
 nf_function nf_db_dump database "Dump a database to a file"
 function nf_db_dump() {(set -euo pipefail
+  DATABASE=${1:-""}
+
   # Remove prefix
-  DATABASE=${1#"${NF_DB_PREFIX}"}
+  DATABASE=${DATABASE#"${NF_DB_PREFIX}"}
   DATABASE=${DATABASE:-development}
 
   FILE=${2:-${NF_DB_PREFIX}${DATABASE}}

@@ -1,6 +1,6 @@
 nf_function nf_db_drop database "Drop a database"
 function nf_db_drop() {(set -euo pipefail
-  if [[ ! ${1} ]]; then
+  if [[ -z ${@} ]]; then
     echo "Usage: ${0} DATABASE ..."
 
     return 1

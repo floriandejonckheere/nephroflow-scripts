@@ -1,6 +1,6 @@
 nf_function nf_db_recreate database "Drop and recreate a database"
 function nf_db_recreate() {(set -euo pipefail
-  if [[ ! ${1} ]]; then
+  if [[ ! ${@} ]]; then
     echo "Usage: ${0} DATABASE ..."
 
     return 1
