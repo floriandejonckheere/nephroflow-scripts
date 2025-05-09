@@ -53,7 +53,7 @@ source ~/.nf/nf.sh
 And configure your machine-specific settings:
 
 ```bash
-nf_path <path_to_your_repositories>
+nf_path <path_to_your_repositories> > /dev/null
 nf_initials <your_initials> > /dev/null
 ```
 

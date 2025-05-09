@@ -114,43 +114,86 @@ function nf_help() {
 ##
 # Configuration functions
 #
-nf_function nf_server config "Set API server (default: http://localhost:3000)"
+nf_function nf_server config "Set API server"
 nf_usage nf_server "[SERVER]"
 function nf_server() {
-  SERVER=${1:-http://localhost:3000}
+  SERVER=${1}
 
-  export NF_SERVER=${SERVER}
+  if [[ -z ${SERVER} ]]; then
+    if [[ -z ${NF_SERVER} ]]; then
+      echo "Server not set. Please configure the server using 'nf_server SERVER'"
 
-  echo "API server set to ${SERVER}"
+      return 1
+    fi
+
+    echo "${NF_SERVER}"
+  else
+    export NF_SERVER=${SERVER}
+
+    echo "API server set to ${NF_SERVER}"
+  fi
 }
 
-nf_function nf_path config "Set repositories path (default: ~/Code)"
+nf_function nf_path config "Set repositories path"
 nf_usage nf_path "[PATH]"
 function nf_path() {
-  _PATH=${1:-~/Code}
+  _PATH=${1}
 
-  export NF_PATH=${_PATH}
+  if [[ -z ${_PATH} ]]; then
+    if [[ -z ${NF_PATH} ]]; then
+      echo "Repositories path not set. Please configure the repositories path using 'nf_path PATH'"
 
-  echo "Repositories path set to ${_PATH}"
+      return 1
+    fi
+
+    echo "${NF_PATH}"
+  else
+    export NF_PATH=${_PATH}
+
+    echo "Repositories path set to ${NF_PATH}"
+  fi
 }
 
 nf_function nf_db_prefix config "Set database prefix (default: nephroflow_)"
 nf_usage nf_db_prefix "[PREFIX]"
 function nf_db_prefix() {
-  PREFIX=${1:-nephroflow_}
+  PREFIX=${1}
 
-  export NF_DB_PREFIX=${PREFIX}
+  if [[ -z ${PREFIX} ]]; then
+    if [[ -z ${NF_PREFIX} ]]; then
+      echo "Database prefix not set. Please configure the database prefix using 'nf_db_prefix PREFIX'"
 
-  echo "Database prefix set to ${PREFIX}"
+      return 1
+    fi
+
+    echo "${NF_PREFIX}"
+  else
+    export NF_PREFIX=${PREFIX}
+
+    echo "Repositories path set to ${NF_PREFIX}"
+  fi
 }
 
 nf_function nf_curl_options config "Set cURL options (default: ${NF_CURL_OPTIONS[*]})"
 nf_usage nf_curl_options "[OPTIONS]"
 function nf_curl_options() {
-  # shellcheck disable=SC2206
-  NF_CURL_OPTIONS=(${=@:-"--silent" "--fail" "--show-error"})
 
-  echo "cURL options set to ${NF_CURL_OPTIONS[*]}"
+  # shellcheck disable=SC2206
+  CURL_OPTIONS=(${=@})
+
+  if [[ -z ${CURL_OPTIONS[*]} ]]; then
+    if [[ -z ${NF_CURL_OPTIONS[*]} ]]; then
+      echo "cURL options not set. Please configure the cURL options using 'nf_curl_options OPTION ...'"
+
+      return 1
+    fi
+
+    echo "${NF_CURL_OPTIONS[*]}"
+  else
+    export NF_CURL_OPTIONS=${CURL_OPTIONS[*]}
+
+    echo "cURL options set to ${NF_CURL_OPTIONS[*]}"
+  fi
 }
 
 nf_function nf_initials config "Get or set initials for the current user"
@@ -160,7 +203,7 @@ function nf_initials() {
 
   if [[ -z ${INITIALS} ]]; then
     if [[ -z ${NF_INITIALS} ]]; then
-      echo "Initials not set. Please configure your initials using 'nf_initials <initials>'"
+      echo "Initials not set. Please configure your initials using 'nf_initials INITIALS'"
 
       return 1
     fi
