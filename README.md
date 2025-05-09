@@ -20,8 +20,10 @@ This repository contains convenience scripts for development at [NDTE](https://n
 Use the following command to install them using Homebrew:
 
 ```bash
-brew install jq yq curl git gzip kubernetes-cli azure-cli gh gnu-sed socat
+brew install zsh jq yq curl git gzip kubernetes-cli azure-cli gh gnu-sed socat
 ```
+
+Install Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop/).
 
 Clone the relevant repositories to your local machine:
 
