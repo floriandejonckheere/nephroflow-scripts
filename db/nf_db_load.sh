@@ -32,7 +32,6 @@ function nf_db_load() {(set -euo pipefail
     FILE="${FILE%.gz}"
   fi
 
-
   TYPE=$(file -b "${FILE}")
   if [[ "${TYPE}" == *"PostgreSQL custom database dump"* ]]; then
     # Use pg_restore for custom format
