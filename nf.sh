@@ -80,15 +80,15 @@ function nf_usage() {
 nf_category helper "Helper functions"
 nf_category config "Configuration functions"
 nf_category auth "Authentication functions"
-nf_category http "HTTP functions"
+nf_category az "Azure functions"
 nf_category database "Database functions"
-nf_category docker "Docker functions"
 nf_category dev "Development functions"
+nf_category docker "Docker functions"
 nf_category git "Git functions"
+nf_category http "HTTP functions"
+nf_category k8s "Kubernetes functions"
 nf_category redis "Redis functions"
 nf_category tsh "Teleport SSH functions"
-nf_category k8s "Kubernetes functions"
-nf_category az "Azure functions"
 
 function nf_help() {
   COMMAND=${1}
