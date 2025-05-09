@@ -164,17 +164,17 @@ function nf_db_prefix() {
   PREFIX=${1}
 
   if [[ -z ${PREFIX} ]]; then
-    if [[ -z ${NF_PREFIX} ]]; then
+    if [[ -z ${NF_DB_PREFIX} ]]; then
       echo "Database prefix not set. Please configure the database prefix using 'nf_db_prefix PREFIX'"
 
       return 1
     fi
 
-    echo "${NF_PREFIX}"
+    echo "${NF_DB_PREFIX}"
   else
-    export NF_PREFIX=${PREFIX}
+    export NF_DB_PREFIX=${PREFIX}
 
-    echo "Repositories path set to ${NF_PREFIX}"
+    echo "Repositories path set to ${NF_DB_PREFIX}"
   fi
 }
 
