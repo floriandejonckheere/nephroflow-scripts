@@ -1,4 +1,4 @@
-nf_function nf_k_db database "Open a database console on a remote database"
+nf_function nf_k_db k8s "Open a database console on a remote database"
 function nf_k_db() {(set -euo pipefail
   NAMESPACE=${1:-$(nf_k_ns)}
 
