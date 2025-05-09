@@ -33,10 +33,14 @@ declare -A NF_FUNCTIONS
 declare -A NF_USAGE
 declare -A NF_CATEGORIES_TO_FUNCTIONS
 
+  # Array needed to keep track of insertion order
+declare -a NF_CATEGORY_ORDER
+
 function nf_category() {
   NAME=${1}
   DESCRIPTION=${2}
 
+  NF_CATEGORY_ORDER+=("${NAME}")
   NF_CATEGORIES[${NAME}]="${DESCRIPTION}"
 }
 
@@ -97,7 +101,7 @@ function nf_help() {
     echo "NephroFlow Scripts ${NF_VERSION}"
 
     # Loop over categories, and print functions in each category
-    for CATEGORY in ${(k)NF_CATEGORIES}; do
+    for CATEGORY in ${NF_CATEGORY_ORDER}; do
       printf "\n%s\n" "${NF_CATEGORIES[${CATEGORY}]}"
 
       # Loop over functions in category
