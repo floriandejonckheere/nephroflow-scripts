@@ -1,5 +1,5 @@
 nf_function nf_r_name redis "Return the name of the Redis or Valkey container"
-function nf_r_name() {
+function nf_r_name() {(set -euo pipefail
   # Parse compose file
   REDIS=$(yq '.volumes | has("redis")' "$(nf_compose_file)")
 
@@ -19,4 +19,4 @@ function nf_r_name() {
   echo "No Redis or Valkey container found in the compose file"
 
   return 1
-}
+)}
