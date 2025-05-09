@@ -16,11 +16,12 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [Github CLI](https://cli.github.com/)
 - [GNU sed](https://www.gnu.org/software/sed/)
 - [socat](http://www.dest-unreach.org/socat/)
+- [awk](https://www.gnu.org/software/gawk/manual/gawk.html)
 
 Use the following command to install them using Homebrew:
 
 ```bash
-brew install zsh jq yq curl git gzip kubernetes-cli azure-cli gh gnu-sed socat
+brew install zsh jq yq curl git gzip kubernetes-cli azure-cli gh gnu-sed socat awk
 ```
 
 Install Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop/).
