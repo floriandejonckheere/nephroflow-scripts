@@ -1,7 +1,7 @@
-nf_function nf_rel release "Bump the version in CHANGELOG.md and create a pull request for the release branch"
+nf_function nf_rel dev "Bump the version in CHANGELOG.md and create a pull request for the release branch"
 function nf_rel() {(set -euo pipefail
   REPOSITORY=${1:-nephroflow-api}
-  RELEASE=${2}
+  RELEASE=${2:-""}
 
   if [[ -z ${RELEASE} ]]; then
     echo "Usage: ${0} REPOSITORY RELEASE"
@@ -13,7 +13,7 @@ function nf_rel() {(set -euo pipefail
   git -C "${NF_PATH}/${REPOSITORY}" pull origin "release/v${RELEASE}"
 
   # Update the version in CHANGELOG.md
-  nf_rel_bump "${REPOSITORY}"
+  nf_bump "${REPOSITORY}"
 
   # Parse the new version from CHANGELOG.md
   NEW_VERSION=$(grep -E "^## \[[0-9]+\.[0-9]+\.[0-9]+\]" "${NF_PATH}/${REPOSITORY}/CHANGELOG.md" | head -1 | sed -E 's/^## \[([0-9]+\.[0-9]+\.[0-9]+)\].*/\1/')
