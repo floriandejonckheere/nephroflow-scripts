@@ -14,7 +14,7 @@ function nf_db_restore() {(set -euo pipefail
   VERSION=${VERSION%_0}
 
   # Find latest snapshot
-  LATEST=$(nf_db_ls | cut -d '|' -f1 | grep "${DATABASE}_${VERSION}_" | sort -r | head -n 1)
+  LATEST=$(nf_db_ls | cut -d '|' -f1 | grep "${DATABASE}_${VERSION}_" | sort -r | head -n 1 | cut -d ' ' -f 1)
 
   if [[ "${LATEST}" == "" ]]; then
     echo "Error: No snapshots found for ${NF_DB_PREFIX}${DATABASE} version ${VERSION}"
@@ -28,9 +28,9 @@ function nf_db_restore() {(set -euo pipefail
     return 1
   fi
 
-  echo "Restoring database ${NF_DB_PREFIX}${DATABASE} from ${LATEST} (version ${VERSION})"
+  echo "Restoring database ${NF_DB_PREFIX}${DATABASE} from ${LATEST} (version ${VERSION/_/.})"
 
   nf_db_copy "${LATEST}" "${DATABASE}" > /dev/null
 
-  echo "Database ${NF_DB_PREFIX}${DATABASE} restored from ${LATEST} (version ${VERSION})"
+  echo "Database ${NF_DB_PREFIX}${DATABASE} restored from ${LATEST} (version ${VERSION/_/.})"
 )}
