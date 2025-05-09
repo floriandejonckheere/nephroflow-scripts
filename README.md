@@ -17,6 +17,12 @@ This repository contains convenience scripts for development at [NDTE](https://n
 - [GNU sed](https://www.gnu.org/software/sed/)
 - [socat](http://www.dest-unreach.org/socat/)
 
+Use the following command to install them using Homebrew:
+
+```bash
+brew install jq yq curl git gzip kubernetes-cli azure-cli gh gnu-sed socat
+```
+
 Clone the relevant repositories to your local machine:
 
 ```sh
